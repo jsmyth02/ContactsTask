@@ -2,11 +2,9 @@ package jamiesmyth.contactstask;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         // Fills dataModel with data from the contacts[] array
         for (int i = 0; i < contacts.length; i++)
         {
+            //dataModels.add(new DataModel(contacts[i].getImageUrl(), contacts[i].getFirstName(), contacts[i].getLastName(), contacts[i].getSex(), Integer.toString(contacts[i].getAge()), contacts[i].getNotes()));
             dataModels.add(new DataModel(contacts[i].getImageUrl(), contacts[i].getFirstName(), contacts[i].getLastName(), contacts[i].getSex(), Integer.toString(contacts[i].getAge()), contacts[i].getNotes()));
         }
 
