@@ -11,16 +11,15 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 
-public class CustomAdapter extends ArrayAdapter<DataModel>{
+public class CustomAdapter extends ArrayAdapter<ContactsStore.Contact>{
 
-    private ArrayList<DataModel> dataSet;
+    private ArrayList<ContactsStore.Contact> dataSet;
     Context mContext;
-    //private int lastPosition = -1;
 
     // Set the viewholder up
     private static class ViewHolder
     {
-        ImageView imgThumbnail;
+        ImageView imgContactPicture;
         TextView txtFirstName;
         TextView txtSecondName;
         TextView txtAge;
@@ -28,21 +27,18 @@ public class CustomAdapter extends ArrayAdapter<DataModel>{
         TextView txtNotes;
     }
 
-    public CustomAdapter(ArrayList<DataModel> data, Context context) {
+    public CustomAdapter(ArrayList<ContactsStore.Contact> data, Context context) {
         super(context, R.layout.list_view_layout, data);
         this.dataSet = data;
         this.mContext=context;
-
     }
 
     // Setup view
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        DataModel dataModel = getItem(position);
+        ContactsStore.Contact contactModel = getItem(position);
         ViewHolder viewHolder;
-
-        //final View result;
 
         // Get views from list view layout
         if (convertView == null) {
@@ -50,31 +46,28 @@ public class CustomAdapter extends ArrayAdapter<DataModel>{
             viewHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(getContext());
             convertView = inflater.inflate(R.layout.list_view_layout, parent, false);
-            viewHolder.imgThumbnail = (ImageView) convertView.findViewById(R.id.list_image);
+            viewHolder.imgContactPicture = (ImageView) convertView.findViewById(R.id.list_image);
             viewHolder.txtFirstName = (TextView) convertView.findViewById(R.id.FirstName);
             viewHolder.txtSecondName = (TextView) convertView.findViewById(R.id.SecondName);
             viewHolder.txtAge = (TextView) convertView.findViewById(R.id.Age);
             viewHolder.txtGender = (TextView) convertView.findViewById(R.id.Gender);
             viewHolder.txtNotes = (TextView) convertView.findViewById(R.id.Notes);
 
-            //result=convertView;
-
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
-            //result=convertView;
         }
 
-        //lastPosition = position;
-
         // Set data from the data model to correct view from the list_view_layout
-        Glide.with(mContext).load(dataModel.getImageURL()).centerCrop().crossFade().into(viewHolder.imgThumbnail);
-        viewHolder.txtFirstName.setText(dataModel.getFirstName());
-        viewHolder.txtSecondName.setText(dataModel.getSecondName());
-        viewHolder.txtAge.setText(dataModel.getAge());
-        viewHolder.txtGender.setText(dataModel.getGender());
-        viewHolder.txtNotes.setText(dataModel.getNotes());
+        Glide.with(mContext).load(contactModel.getImageUrl()).centerCrop().crossFade().into(viewHolder.imgContactPicture);
+        viewHolder.txtFirstName.setText(contactModel.getFirstName());
+        viewHolder.txtSecondName.setText(contactModel.getLastName());
+        viewHolder.txtAge.setText(Integer.toString(contactModel.getAge()));
+        viewHolder.txtGender.setText(contactModel.getSex());
+        viewHolder.txtNotes.setText(contactModel.getNotes());
         return convertView;
     }
+
+
 
 }
