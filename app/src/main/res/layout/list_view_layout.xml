@@ -12,7 +12,7 @@
                   android:layout_marginRight="5dip">
 
         <ImageView
-            android:id="@+id/list_image"
+            android:id="@+id/ContactsImage"
             android:layout_width="50dip"
             android:layout_height="50dip"
             android:src="@android:drawable/ic_dialog_info"/>
