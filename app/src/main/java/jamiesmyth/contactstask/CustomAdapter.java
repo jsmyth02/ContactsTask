@@ -10,11 +10,11 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class CustomAdapter extends ArrayAdapter<ContactsStore.Contact>{
 
-    private ArrayList<ContactsStore.Contact> dataSet;
-    Context mContext;
+    private Context mContext;
 
     // Set the viewholder up
     private static class ViewHolder
@@ -29,7 +29,6 @@ public class CustomAdapter extends ArrayAdapter<ContactsStore.Contact>{
 
     public CustomAdapter(ArrayList<ContactsStore.Contact> data, Context context) {
         super(context, R.layout.list_view_layout, data);
-        this.dataSet = data;
         this.mContext=context;
     }
 
@@ -46,7 +45,7 @@ public class CustomAdapter extends ArrayAdapter<ContactsStore.Contact>{
             viewHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(getContext());
             convertView = inflater.inflate(R.layout.list_view_layout, parent, false);
-            viewHolder.imgContactPicture = (ImageView) convertView.findViewById(R.id.list_image);
+            viewHolder.imgContactPicture = (ImageView) convertView.findViewById(R.id.ContactsImage);
             viewHolder.txtFirstName = (TextView) convertView.findViewById(R.id.FirstName);
             viewHolder.txtSecondName = (TextView) convertView.findViewById(R.id.SecondName);
             viewHolder.txtAge = (TextView) convertView.findViewById(R.id.Age);
@@ -62,7 +61,7 @@ public class CustomAdapter extends ArrayAdapter<ContactsStore.Contact>{
         Glide.with(mContext).load(contactModel.getImageUrl()).centerCrop().crossFade().into(viewHolder.imgContactPicture);
         viewHolder.txtFirstName.setText(contactModel.getFirstName());
         viewHolder.txtSecondName.setText(contactModel.getLastName());
-        viewHolder.txtAge.setText(Integer.toString(contactModel.getAge()));
+        viewHolder.txtAge.setText(String.format(Locale.UK, "%d", contactModel.getAge()));
         viewHolder.txtGender.setText(contactModel.getSex());
         viewHolder.txtNotes.setText(contactModel.getNotes());
         return convertView;

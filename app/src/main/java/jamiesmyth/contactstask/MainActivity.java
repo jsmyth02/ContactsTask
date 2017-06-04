@@ -9,14 +9,15 @@ import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
 
-    ArrayList<ContactsStore.Contact> contactsModel;
-    ListView listView;
-    private static CustomAdapter adapter;
-    ContactsStore.Contact[] contacts;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        CustomAdapter adapter;
+        ArrayList<ContactsStore.Contact> contactsModel;
+        ListView listView;
+        ContactsStore.Contact[] contacts;
 
         listView = (ListView) findViewById(R.id.list);
 
@@ -24,8 +25,7 @@ public class MainActivity extends AppCompatActivity {
         ContactsStore contactsStore = ContactsStore.getStore();
         contacts = contactsStore.getContacts();
 
-       // Sets a new dataModel up
-
+       // Creates and populates contacts model
         contactsModel = new ArrayList<>(Arrays.asList(contacts));
 
         // Sets custom adapter up to be used for the list view
