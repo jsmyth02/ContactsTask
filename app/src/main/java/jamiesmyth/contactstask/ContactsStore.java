@@ -8,7 +8,7 @@ public class ContactsStore {
     private static ContactsStore contactStore;
     private Contact[] contacts;
 
-    public ContactsStore() {
+    private ContactsStore() {
         initialiseContacts();
     }
 
